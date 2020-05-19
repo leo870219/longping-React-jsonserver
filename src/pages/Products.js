@@ -9,7 +9,7 @@ class Products extends React.Component {
   };
 
   componentDidMount() {
-  axios.get("/products").then(response=>{
+  axios.get("http://localhost/html/longping/longping/src/php/Products.php").then(response=>{
    this.setState({products:response.data})
   })
 }

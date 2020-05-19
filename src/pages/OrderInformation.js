@@ -1,23 +1,28 @@
 import React from "react";
 import axios from "axios";
+import DataPicker from "../components/DataPicker";
 class OrderInformation extends React.Component {
-  state = {
-    id: "",
-    takeway: "",
-    takedate: "",
-    taketime: "",
-    username: "",
-    usertel: "",
-    usermail: "",
-    address: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: "",
+      takeway: "",
+      takedate: "",
+      taketime: "",
+      username: "",
+      usertel: "",
+      usermail: "",
+      address: "",
+      display: "none",
+    };
+  }
 
   submit = (e) => {
     e.preventDefault();
     const orderinformation = { ...this.state };
     axios
       .post(
-        "http://localhost/html/longping(React)/longping/src/php/connectMysql.php",
+        "http://localhost/html/longping/longping/src/php/OrderInformation.php",
         orderinformation
       )
       .then((res) => {
@@ -31,6 +36,18 @@ class OrderInformation extends React.Component {
       [name]: value,
     });
   };
+  displayBlock = () => {
+    this.setState({ display: "" });
+  };
+  displayNone = () => {
+    this.setState({ display: "none" });
+  };
+  dataOnclick = (value, name) => {
+    this.setState({
+      [name]: value,
+    });
+  };
+
   render() {
     return (
       <section id="booking-second" className="orderInformationBackground">
@@ -49,6 +66,7 @@ class OrderInformation extends React.Component {
                   name="takeway"
                   value="外送"
                   onChange={this.handleChange}
+                  onClick={this.displayBlock}
                 />
                 外送
               </label>
@@ -60,6 +78,7 @@ class OrderInformation extends React.Component {
                   name="takeway"
                   value="外帶"
                   onChange={this.handleChange}
+                  onClick={this.displayNone}
                 />
                 外帶
               </label>
@@ -67,31 +86,18 @@ class OrderInformation extends React.Component {
             <br />
             <label>取餐時間:</label>
             <div className="form-inline">
-              <input
-                type="date"
-                className="form-control col-sm-6 col-12"
-                name="takedate"
-                onChange={this.handleChange}
-                value={this.state.takedate}
+              <DataPicker
+                onChange={this.dataOnclick}
+                data={this.state.takedate}
+                time={this.state.taketime}
               />
-              <select
-                id="taketime"
-                name="taketime"
-                className="form-control col-sm-6 col-12"
-                onChange={this.handleChange}
-                value={this.state.taketime}
-              >
-                <option>15:00</option>
-                <option>16:00</option>
-                <option>17:00</option>
-              </select>
             </div>
             <label>姓名:</label>
             <input
               type="text"
               className="form-control"
               name="username"
-              onChange={this.handleChange}
+              onChange={(text) => this.handleChange}
               value={this.state.username}
             />
             <label>手機:</label>
@@ -115,7 +121,7 @@ class OrderInformation extends React.Component {
               onChange={this.handleChange}
               value={this.state.usermail}
             />
-            <div id="demo">
+            <div id="demo" className={this.state.display}>
               <label>外送地址:</label>
 
               <select
