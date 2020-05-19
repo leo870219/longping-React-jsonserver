@@ -1,0 +1,44 @@
+#navbarNav a {
+  color: rgb(44, 40, 40);
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  .login-box {
+    width: 50vh;
+  }
+}
+
+.register-box {
+  width: 90vh;
+}
+
+.bg-lighten-5 {
+  background-color: #eeeee3;
+}
+
+.box-shadows {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.productBackground {
+  background-image: url(../images/background.jpeg);
+}
+
+#productList {
+  .img-fluid {
+    max-width: 80%;
+    height: auto;
+  }
+}
+
+.orderInformationBackground {
+  background-image: url(../images/bg.jpg);
+}
+
+.none{
+  display: none
+}
