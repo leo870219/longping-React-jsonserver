@@ -1,18 +1,21 @@
 import React from "react";
-import axios from 'commons/axios';
+import axios from "commons/axios";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import MainImage from "components/MainImage";
 import Product from "components/Product";
 
 class Products extends React.Component {
   state = {
-    products: []
+    products: [],
   };
 
   componentDidMount() {
-  axios.get("http://localhost/html/longping/longping/src/php/Products.php").then(response=>{
-   this.setState({products:response.data})
-  })
-}
+    axios
+      .get("http://localhost/html/longping/longping/src/php/Products.php")
+      .then((response) => {
+        this.setState({ products: response.data });
+      });
+  }
   render() {
     return (
       <div className="productContent">
@@ -61,13 +64,23 @@ class Products extends React.Component {
             </div>
           </nav>
           <section id="productList">
+            <TransitionGroup component={null}>
               {this.state.products.map((p) => {
                 return (
-                  <div className="container" key={p.id}>
-                    <Product product={p} />
-                  </div>
+                  <CSSTransition
+                    classNames="products-fade"
+                    in
+                    appear={true}
+                    timeout={3000}
+                    key={p.id}
+                  >
+                    <div className="container" key={p.id}>
+                      <Product product={p} />
+                    </div>
+                  </CSSTransition>
                 );
               })}
+            </TransitionGroup>
           </section>
         </div>
       </div>
