@@ -9,12 +9,9 @@ class Products extends React.Component {
     products: [],
   };
 
-  componentDidMount() {
-    axios
-      .get("http://localhost/html/longping/longping/src/php/Products.php")
-      .then((response) => {
+  componentDidMount = async () =>{
+   const response= await axios.get("http://localhost/html/longping/longping/src/php/Products.php")
         this.setState({ products: response.data });
-      });
   }
   render() {
     return (
