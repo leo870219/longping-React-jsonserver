@@ -1,0 +1,41 @@
+2020/05/22
+
+在遇到過多條件時如果使用if/else if/else 會使程式碼不好維護及閱讀
+A:用switch case取代多個if else
+
+switch (expression) {
+  case value1:
+        //當 expression 的值符合 value1
+        //要執行的陳述句
+    [break;]
+  case value2:
+        //當 expression 的值符合 value2
+        //要執行的陳述句
+    [break;]
+  ...
+  case valueN:
+        //當 expression 的值符合 valueN
+        //要執行的陳述句
+    [break;]
+  [default:
+        //當 expression 的值都不符合上述條件
+        //要執行的陳述句
+    [break;]]
+}
+
+另一種用法
+switch (true) {
+  case (a===1):
+       
+    break;
+  case (a===2):
+      
+    break;
+
+  case (a===3):
+       
+    break;
+  default:
+console.log('Out Of Range')
+    break;
+}

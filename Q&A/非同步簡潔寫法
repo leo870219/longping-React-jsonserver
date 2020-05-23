@@ -1,0 +1,53 @@
+2020/05/22
+
+Async Await他是 JavaScript 在 ES7 當中，是 Promise 的語法糖
+
+Async/Await 的優點是：
+
+更簡潔並易讀的寫法
+不會陷入 Promise Chain 的地獄當中
+
+async function() 是回傳 Promise
+
+Promise寫法:
+function getToken() {
+    return new Promise(function(resolve, reject) {
+        const states = Math.random() > 0.5 ? true : false
+            setTimeout(function() {
+                if (states) {
+                    resolve('順利取餐')
+                } else {
+                    reject('取不到餐')
+                }
+            }, 3000)
+    })
+}
+
+getToken()
+    .then(res => console.log(res))  // 順利取餐
+    .catch(err => console.log(err)) // 取不到餐
+
+
+async/await改寫:
+    let promise = new Promise(function(resolve, reject) {
+    let states = Math.random() > 0.5 ? true : false
+    console.log(states)
+    setTimeout(function() {
+                if (states) {
+                    resolve('順利取餐')
+                } else {
+                    reject('取不到餐')
+                }
+            }, 3000)
+})
+
+async function getToken() {
+    try {
+        const fufillValue = await promise
+        console.log(fufillValue)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+getToken() // 順利取餐 or // 取不到餐
