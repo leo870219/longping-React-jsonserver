@@ -11,7 +11,7 @@ class Products extends React.Component {
 
   componentDidMount = async () =>{
     try {
-      const response= await axios.get("http://localhost/html/longping/longping/src/php/Products.php")
+      const response= await axios.get("https://github.com/leo870219/longping-ReactjsPHPMysql/blob/master/src/php/connectMysql.php")
       this.setState({ products: response.data });
   } catch (err) {
     console.log(err)
