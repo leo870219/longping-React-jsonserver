@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "commons/axios";
+import axios from 'axios';
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import MainImage from "components/MainImage";
 import Product from "components/Product";
