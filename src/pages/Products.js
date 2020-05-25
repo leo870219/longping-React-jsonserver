@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "commons/axios";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import MainImage from "components/MainImage";
 import Product from "components/Product";
@@ -9,14 +8,7 @@ class Products extends React.Component {
     products: [],
   };
 
-  componentDidMount = async () =>{
-    try {
-      const response= await axios.get("https://github.com/leo870219/longping-ReactjsPHPMysql/blob/master/src/php/connectMysql.php")
-      this.setState({ products: response.data });
-  } catch (err) {
-    console.log(err)
-  }
-}
+
 
   render() {
     return (
