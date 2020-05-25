@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+
 import DataPicker from "../components/DataPicker";
 class OrderInformation extends React.Component {
   constructor(props) {
@@ -19,15 +19,7 @@ class OrderInformation extends React.Component {
 
   submit = (e) => {
     e.preventDefault();
-    const orderinformation = { ...this.state };
-    axios
-      .post(
-        "http://localhost/html/longping/longping/src/php/OrderInformation.php",
-        orderinformation
-      )
-      .then((res) => {
-        console.log(res.data);
-      });
+   
   };
   handleChange = (e) => {
     const value = e.target.value;
