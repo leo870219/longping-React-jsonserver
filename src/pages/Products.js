@@ -10,9 +10,14 @@ class Products extends React.Component {
   };
 
   componentDidMount = async () =>{
-   const response= await axios.get("http://localhost/html/longping/longping/src/php/Products.php")
-        this.setState({ products: response.data });
+    try {
+      const response= await axios.get("./connectMysql.php")
+      this.setState({ products: response.data });
+  } catch (err) {
+    console.log(err)
   }
+}
+
   render() {
     return (
       <div className="productContent">
