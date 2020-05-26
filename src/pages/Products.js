@@ -7,17 +7,18 @@ import Product from "components/Product";
 class Products extends React.Component {
   state = {
     products: [],
+    delivery:[]
   };
 
   componentDidMount = async () =>{
     try {
-      const response= await axios.get("./connectMysql.php")
+      const response= await axios.get("http://localhost/html/longping/longping/src/php/Products.php")
       this.setState({ products: response.data });
+      console.log(this.state.products.map(a=>a))
   } catch (err) {
     console.log(err)
   }
-}
-
+  }
   render() {
     return (
       <div className="productContent">

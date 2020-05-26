@@ -14,9 +14,18 @@ class OrderInformation extends React.Component {
       usermail: "",
       address: "",
       display: "none",
+      delivery:[]
     };
   }
-
+componentDidMount =async()=>{
+  try {
+    const response= await axios.get("road.json")
+    this.setState({ delivery: response.data.address });
+    console.log(this.state.delivery.map(a=>a))
+} catch (err) {
+  console.log(err)
+}
+}
   submit = (e) => {
     e.preventDefault();
     const orderinformation = { ...this.state };
@@ -47,6 +56,14 @@ class OrderInformation extends React.Component {
       [name]: value,
     });
   };
+  selectRoad= (e)=>{
+    const value = e.target.value;
+    const area= this.state.delivery.filter((a)=>{
+return a = value;
+    })
+    console.log(area)
+    
+  }
 
   render() {
     return (
@@ -130,10 +147,17 @@ class OrderInformation extends React.Component {
                 id="city"
                 size="1"
                 placeholder="請選擇外送地址"
+                onChange={this.selectRoad}
               >
                 <option value="" className="none">
                   請先選擇縣市
                 </option>
+                {
+                  this.state.delivery.map((delivery) => {
+                  return(
+                    <option value={delivery.area}key={delivery.id}>{delivery.area}</option>
+                  )
+                })}
               </select>
               <select
                 className="form-control"
