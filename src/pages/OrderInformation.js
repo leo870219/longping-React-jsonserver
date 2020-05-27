@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from  "axios";
 import DataPicker from "../components/DataPicker";
 
 class OrderInformation extends React.Component {
@@ -18,7 +18,6 @@ class OrderInformation extends React.Component {
       city: "台中",
       area: "",
       road: "",
-      path: "",
       delivery: [],
     };
   }
