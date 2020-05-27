@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import MainImage from "components/MainImage";
 import Product from "components/Product";
@@ -7,18 +7,20 @@ import Product from "components/Product";
 class Products extends React.Component {
   state = {
     products: [],
-    delivery:[]
+    delivery: [],
   };
 
-  componentDidMount = async () =>{
+  componentDidMount = async () => {
     try {
-      const response= await axios.get("http://localhost/html/longping/longping/src/php/Products.php")
+      const response = await axios.get(
+        "http://localhost/html/longping/longping/src/php/Products.php"
+      );
       this.setState({ products: response.data });
-      console.log(this.state.products.map(a=>a))
-  } catch (err) {
-    console.log(err)
-  }
-  }
+      console.log(this.state.products.map((a) => a));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   render() {
     return (
       <div className="productContent">

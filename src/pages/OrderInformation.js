@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import DataPicker from "../components/DataPicker";
+
 class OrderInformation extends React.Component {
   constructor(props) {
     super(props);
@@ -14,30 +15,28 @@ class OrderInformation extends React.Component {
       usermail: "",
       address: "",
       display: "none",
-      delivery:[]
+      city: "台中",
+      area: "",
+      road: "",
+      path: "",
+      delivery: [],
     };
   }
-componentDidMount =async()=>{
-  try {
-    const response= await axios.get("road.json")
-    this.setState({ delivery: response.data.address });
-    console.log(this.state.delivery.map(a=>a))
-} catch (err) {
-  console.log(err)
-}
-}
-  submit = (e) => {
+
+  submit = async (e) => {
     e.preventDefault();
     const orderinformation = { ...this.state };
-    axios
-      .post(
+    try {
+      let response = await axios.post(
         "http://localhost/html/longping/longping/src/php/OrderInformation.php",
         orderinformation
-      )
-      .then((res) => {
-        console.log(res.data);
-      });
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -45,25 +44,44 @@ componentDidMount =async()=>{
       [name]: value,
     });
   };
-  displayBlock = () => {
+  displayBlock = async () => {
     this.setState({ display: "" });
+    try {
+      const response = await axios.get("road.json");
+      this.setState({ delivery: response.data.address });
+      this.setState({ area: response.data.address[0].area });
+      this.setState({ road: response.data.address[0].road[0] });
+      console.log(this.state.delivery[0].area);
+    } catch (error) {
+      console.log(error);
+    }
   };
   displayNone = () => {
     this.setState({ display: "none" });
+    this.setState({ delivery: [] });
+    this.setState({ area: "" });
+    this.setState({ road: "" });
   };
   dataOnclick = (value, name) => {
     this.setState({
       [name]: value,
     });
   };
-  selectRoad= (e)=>{
-    const value = e.target.value;
-    const area= this.state.delivery.filter((a)=>{
-return a = value;
-    })
-    console.log(area)
-    
-  }
+  changeArea = (e) => {
+    this.setState({ area: e.target.value });
+    this.state.delivery.map((item, index) => {
+      if (e.target.value === item.area) {
+        this.setState({ road: item.road[0] });
+      }
+      return true;
+    });
+  };
+  changeRoad = (e) => {
+    this.setState({ road: e.target.value });
+  };
+  changeAddress = (e) => {
+    this.setState({ address: e.target.value });
+  };
 
   render() {
     return (
@@ -114,7 +132,7 @@ return a = value;
               type="text"
               className="form-control"
               name="username"
-              onChange={(text) => this.handleChange}
+              onChange={this.handleChange}
               value={this.state.username}
             />
             <label>手機:</label>
@@ -147,40 +165,46 @@ return a = value;
                 id="city"
                 size="1"
                 placeholder="請選擇外送地址"
-                onChange={this.selectRoad}
+                onChange={this.handleChange}
               >
-                <option value="" className="none">
-                  請先選擇縣市
-                </option>
-                {
-                  this.state.delivery.map((delivery) => {
-                  return(
-                    <option value={delivery.area}key={delivery.id}>{delivery.area}</option>
-                  )
-                })}
+                <option>{this.state.city}</option>
               </select>
               <select
                 className="form-control"
                 name="area"
                 id="area"
                 size="1"
-              ></select>
+                onChange={this.changeArea}
+              >
+                {this.state.delivery.map((item, index) => {
+                  return <option key={index}>{item.area}</option>;
+                })}
+              </select>
               <select
                 className="form-control"
                 name="road"
                 id="road"
                 size="1"
-              ></select>
+                onChange={this.handleChange}
+              >
+                {this.state.delivery.map((item, index) => {
+                  if (this.state.area === item.area) {
+                    return item.road.map((item, index) => (
+                      <option key={index}>{item}</option>
+                    ));
+                  }
+                  return true;
+                })}
+              </select>
               <input
                 className="form-control"
                 type="text"
                 id="address"
                 name="address"
                 placeholder="外送地址"
-                onChange={this.handleChange}
+                onChange={this.changeAddress}
                 value={this.state.address}
               />
-              <input type="hidden" name="path" />
             </div>
             <button type="submit" className="btn btn-primary">
               選擇餐點
