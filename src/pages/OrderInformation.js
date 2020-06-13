@@ -30,6 +30,7 @@ class OrderInformation extends React.Component {
         "http://localhost/html/longping/longping/src/php/OrderInformation.php",
         orderinformation
       );
+      this.props.history.push('/booking');
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -101,6 +102,7 @@ class OrderInformation extends React.Component {
                   value="外送"
                   onChange={this.handleChange}
                   onClick={this.displayBlock}
+                  required="required"
                 />
                 外送
               </label>
@@ -133,6 +135,7 @@ class OrderInformation extends React.Component {
               name="username"
               onChange={this.handleChange}
               value={this.state.username}
+              required="required"
             />
             <label>手機:</label>
             <input
@@ -145,6 +148,7 @@ class OrderInformation extends React.Component {
               size="30"
               onChange={this.handleChange}
               value={this.state.usertel}
+              required="required"
             />
 
             <label>電子郵件:</label>
@@ -154,6 +158,7 @@ class OrderInformation extends React.Component {
               className="form-control"
               onChange={this.handleChange}
               value={this.state.usermail}
+              required="required"
             />
             <div id="demo" className={this.state.display}>
               <label>外送地址:</label>
@@ -164,7 +169,7 @@ class OrderInformation extends React.Component {
                 id="city"
                 size="1"
                 placeholder="請選擇外送地址"
-                onChange={this.handleChange}
+                onChange={this.handleChange}  
               >
                 <option>{this.state.city}</option>
               </select>
@@ -174,6 +179,7 @@ class OrderInformation extends React.Component {
                 id="area"
                 size="1"
                 onChange={this.changeArea}
+                required={(this.state.takeway==='外送')? 'required' : ''}
               >
                 {this.state.delivery.map((item, index) => {
                   return <option key={index}>{item.area}</option>;
@@ -203,6 +209,7 @@ class OrderInformation extends React.Component {
                 placeholder="外送地址"
                 onChange={this.changeAddress}
                 value={this.state.address}
+                required={(this.state.takeway==='外送')? 'required' : ''}
               />
             </div>
             <button type="submit" className="btn btn-primary">

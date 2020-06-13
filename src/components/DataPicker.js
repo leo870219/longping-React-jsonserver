@@ -4,12 +4,21 @@ class DataPicker extends React.Component {
   componentDidMount() {
     let current = new Date();
     const data = document.getElementById("takedate");
-    data.min =
+    if(current.getDate()< 10){
+      data.min =
+      current.getFullYear() +
+      "-0" +
+      (current.getMonth() + 1) +
+      "-0" +
+      current.getDate();
+    }else{
+      data.min =
       current.getFullYear() +
       "-0" +
       (current.getMonth() + 1) +
       "-" +
       current.getDate();
+    }
     switch (current.getMonth() + 1) {
       case 1:
       case 3:
@@ -91,7 +100,6 @@ class DataPicker extends React.Component {
               (current.getMonth() + 1) +
               "-" +
               (current.getDate() + 9);
-            console.log(data.max);
             break;
           case current.getDate() + 9 > 31:
             data.max =
@@ -127,7 +135,6 @@ class DataPicker extends React.Component {
               (current.getMonth() + 2) +
               "-0" +
               (current.getDate() - 20);
-            console.log(data.max);
             break;
           case current.getMonth() + 1 === 11 && current.getDate() + 9 > 30:
             data.max =
@@ -172,7 +179,6 @@ class DataPicker extends React.Component {
               (current.getMonth() + 2) +
               "-0" +
               (current.getDate() - 20);
-            console.log(data.max);
             break;
           case current.getDate() + 9 <= 30:
             data.max =
@@ -310,6 +316,7 @@ class DataPicker extends React.Component {
           name="takedate"
           onChange={this.orderData}
           value={this.props.data}
+          required="required"
         />
         <select
           id="taketime"
@@ -317,6 +324,7 @@ class DataPicker extends React.Component {
           className="form-control col-sm-6 col-12"
           onChange={this.orderTime}
           value={this.props.time}
+          required="required"
         />
       </React.Fragment>
     );

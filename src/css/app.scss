@@ -39,22 +39,135 @@
   background-image: url(../images/bg.jpg);
 }
 
-.none{
-  display: none
+.none {
+  display: none;
 }
 
-.products-fade-enter{
+.products-fade-enter {
   opacity: 0.1;
 }
-.products-fade-enter-active{
+.products-fade-enter-active {
   opacity: 1;
   transition: all 500ms ease-in;
 }
 
-.products-fade-appear{
-  opacity: 0;
+.tool-box {
+  .img-fluid {
+    max-width: 50%;
+  }
+  .search-box {
+    input {
+      font-size: 2vmin;
+    }
+  }
+  .car-box {
+    font-size: 3vmin;
+  }
 }
-.products-fade-appear-active{
-  opacity: 1;
-  transition: all 1300ms ease-in;
+
+.card {
+  margin: 3vmin 0 0 0;
+  .out-stock {
+    .out-stock-text {
+      z-index: 1 !important;
+    }
+  }
+  .menu-card-img {
+    max-width: 80%;
+    margin: 5vmin auto auto auto;
+  }
+  .card-link {
+    font-size: 3vmin;
+    outline: none;
+    border: none;
+    padding: 0;
+    background-color: #eee;
+    width: 4vmin;
+    height: 4vmin;
+    border-radius: 20vmin;
+    color: rgb(143, 140, 140);
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+      background-color: #333;
+      color: #fff;
+    }
+    &:active {
+      background-color: rgb(10, 88, 133);
+      color: #fff;
+    }
+  }
+}
+.order-menu {
+  background-color: whitesmoke;
+  .container {
+    padding-top: 3vmin;
+    padding-bottom: 3vmin;
+  }
+  .add-btn {
+    position: fixed;
+    right: 0;
+    top: 10rem;
+    z-index: 99;
+  }
+}
+
+// --------- Panel component ------------
+.panel-wrapper {
+  position: relative;
+  z-index: 99;
+  .panel {
+    transition: all 0.3s ease-in-out;
+    transform: translateX(25rem);
+  }
+  &.active {
+    .over-layer {
+      display: block;
+    }
+    .panel {
+      transform: translateX(0);
+    }
+  }
+}
+
+.over-layer {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9;
+}
+.panel {
+  width: 25rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: -3px 0 3px rgba(0, 0, 0, 0.04);
+  transform: translateX(25rem);
+  transition: all 0.3s ease-in-out;
+  z-index: 99;
+  .head {
+    padding: 0.5rem;
+    text-align: right;
+    .close {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      line-height: 1;
+      margin-right: 4px;
+    }
+  }
+}
+
+// ------- products component ---------
+
+// ---------- Inventory Component --------
+.inventory {
+  padding: 1rem 2rem;
 }
