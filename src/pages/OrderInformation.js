@@ -27,7 +27,7 @@ class OrderInformation extends React.Component {
     const orderinformation = { ...this.state };
     try {
       let response = await axios.post(
-        "http://localhost/html/longping/longping/src/php/OrderInformation.php",
+        "/php/OrderInformation.php",
         orderinformation
       );
       this.props.history.push('/booking');
