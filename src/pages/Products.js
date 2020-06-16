@@ -14,7 +14,7 @@ class Products extends React.Component {
       const response = await axios({
         method:'get',
         baseURL:"https://longping-react-phpmysql.herokuapp.com/",
-        url:'/src/php/Products.php'
+        url:'/longping/public/Products.php'
       }
         
       );
