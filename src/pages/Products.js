@@ -11,8 +11,12 @@ class Products extends React.Component {
 
   componentDidMount = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost/html/longping/longping/src/php/Products.php"
+      const response = await axios({
+        method:'get',
+        baseURL:"https://longping-react-phpmysql.herokuapp.com/",
+        url:'/src/php/Products.php'
+      }
+        
       );
       this.setState({ products: response.data });
     } catch (error) {
