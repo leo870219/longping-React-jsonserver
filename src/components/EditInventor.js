@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "commons/axios";
-import {toast} from 'react-toastify';
+import { toast } from "react-toastify";
 
-class AddInventory extends React.Component {
+class EditInventor extends React.Component {
   state = {
+    id: "",
     name: "",
     image: "",
     mainmeal: "",
@@ -11,7 +12,17 @@ class AddInventory extends React.Component {
     price: "",
     status: "available",
   };
-
+  componentDidMount() {
+    const { id, name, image, mainmeal, sidedishes, price } = this.props.product;
+    this.setState({
+      id,
+      name,
+      image,
+      mainmeal,
+      sidedishes,
+      price,
+    });
+  }
   handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -23,12 +34,25 @@ class AddInventory extends React.Component {
     e.preventDefault();
     const product = { ...this.state };
     try {
-      let response = await axios.post(
+      let response = await axios.put(
         "https://longping-phpmysql.herokuapp.com/Products.php",
         product
       );
-      this.props.close(response.data)
-      toast.success('Add Success')
+      this.props.close(response.data);
+      toast.success("Edit Success");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  onDelete = async (e) => {
+    const product = { ...this.state };
+    try {
+      let response = await axios.delete(
+        "http://localhost/html/longping/longping/src/php/Products.php",
+        {data:product}
+      );
+      this.props.close(response.data);
+      toast.success("Delete Success");
     } catch (error) {
       console.log(error);
     }
@@ -117,10 +141,18 @@ class AddInventory extends React.Component {
               className="btn btn-dark"
               type="button"
               onClick={() => {
-                this.props.close("AddInventor Data");
+                this.props.close();
               }}
             >
               Cancel
+            </button>
+            <button
+              className="btn btn-danger "
+              type="button"
+              onClick={
+                this.onDelete}
+            >
+              Delete
             </button>
           </div>
         </form>
@@ -129,4 +161,4 @@ class AddInventory extends React.Component {
   }
 }
 
-export default AddInventory;
+export default EditInventor;
