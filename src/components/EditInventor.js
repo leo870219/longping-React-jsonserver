@@ -42,6 +42,7 @@ class EditInventor extends React.Component {
       toast.success("Edit Success");
     } catch (error) {
       console.log(error);
+      
     }
   };
   onDelete = async (e) => {
