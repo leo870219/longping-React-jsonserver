@@ -4,38 +4,196 @@ class DataPicker extends React.Component {
   componentDidMount() {
     let current = new Date();
     const data = document.getElementById("takedate");
-    if (current.getMonth() + 1 < 10) {
-      let min =
-        current.getFullYear() +
-        "-0" +
-        (current.getMonth() + 1) +
-        "-" +
-        current.getDate();
-      let max =
-        current.getFullYear() +
-        "-0" +
-        (current.getMonth() + 1) +
-        "-" +
-        (current.getDate() + 10);
-      data.min = min;
-      data.max = max;
-    } else {
-      let min =
-        current.getFullYear() +
-        "-" +
-        (current.getMonth() + 1) +
-        "-" +
-        current.getDate();
-      let max =
-        current.getFullYear() +
-        "-" +
-        (current.getMonth() + 1) +
-        "-" +
-        (current.getDate() + 10);
-      data.min = min;
-      data.max = max;
+    data.min =
+      current.getFullYear() +
+      "-0" +
+      (current.getMonth() + 1) +
+      "-" +
+      current.getDate();
+    switch (current.getMonth() + 1) {
+      case 1:
+      case 3:
+      case 5:
+      case 7:
+      case 8:
+      case 10:
+      case 12:
+        switch (true) {
+          case current.getMonth() + 1 === 8 && current.getDate() + 9 > 31:
+            data.max =
+              current.getFullYear() +
+              "-0" +
+              (current.getMonth() + 2) +
+              "-0" +
+              (current.getDate() - 22);
+            break;
+          case current.getMonth() + 1 === 10 && current.getDate() + 9 > 31:
+            data.max =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 2) +
+              "-0" +
+              (current.getDate() - 22);
+            data.min = data.min =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 1) +
+              "-" +
+              current.getDate();
+            break;
+          case current.getMonth() + 1 === 10 && current.getDate() + 9 <= 31:
+            data.max =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 1) +
+              "-" +
+              (current.getDate() + 9);
+            data.min = data.min =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 1) +
+              "-" +
+              current.getDate();
+            break;
+          case current.getMonth() + 1 === 12 && current.getDate() + 9 > 31:
+            data.max =
+              current.getFullYear() +
+              1 +
+              "-0" +
+              (current.getMonth() + 2) +
+              "-0" +
+              (current.getDate() - 22);
+            data.min = data.min =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 1) +
+              "-" +
+              current.getDate();
+            break;
+          case current.getMonth() + 1 === 12 && current.getDate() + 9 <= 31:
+            data.max =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 1) +
+              "-" +
+              (current.getDate() + 9);
+            data.min = data.min =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 1) +
+              "-" +
+              current.getDate();
+            break;
+          case current.getDate() + 9 === 31:
+            data.max =
+              current.getFullYear() +
+              "-0" +
+              (current.getMonth() + 1) +
+              "-" +
+              (current.getDate() + 9);
+            console.log(data.max);
+            break;
+          case current.getDate() + 9 > 31:
+            data.max =
+              current.getFullYear() +
+              "-0" +
+              (current.getMonth() + 2) +
+              "-0" +
+              (current.getDate() - 22);
+            break;
+          case current.getDate() + 9 <= 31:
+            data.max =
+              current.getFullYear() +
+              "-0" +
+              (current.getMonth() + 1) +
+              "-" +
+              (current.getDate() + 9);
+            break;
+          default:
+            console.log("Error");
+            break;
+        }
+        break;
+      case 2:
+      case 4:
+      case 6:
+      case 9:
+      case 11:
+        switch (true) {
+          case current.getMonth() + 1 === 9 && current.getDate() + 9 > 30:
+            data.max =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 2) +
+              "-0" +
+              (current.getDate() - 20);
+            console.log(data.max);
+            break;
+          case current.getMonth() + 1 === 11 && current.getDate() + 9 > 30:
+            data.max =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 2) +
+              "-0" +
+              (current.getDate() - 20);
+            data.min = data.min =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 1) +
+              "-" +
+              current.getDate();
+            break;
+          case current.getMonth() + 1 === 11 && current.getDate() + 9 <= 30:
+            data.max =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 1) +
+              "-" +
+              (current.getDate() + 9);
+            data.min = data.min =
+              current.getFullYear() +
+              "-" +
+              (current.getMonth() + 1) +
+              "-" +
+              current.getDate();
+            break;
+          case current.getDate() + 9 === 30:
+            data.max =
+              current.getFullYear() +
+              "-0" +
+              (current.getMonth() + 1) +
+              "-" +
+              (current.getDate() + 9);
+            break;
+          case current.getDate() + 9 >= 30:
+            data.max =
+              current.getFullYear() +
+              "-0" +
+              (current.getMonth() + 2) +
+              "-0" +
+              (current.getDate() - 20);
+            console.log(data.max);
+            break;
+          case current.getDate() + 9 <= 30:
+            data.max =
+              current.getFullYear() +
+              "-0" +
+              (current.getMonth() + 1) +
+              "-" +
+              (current.getDate() + 9);
+            break;
+          default:
+            console.log("Error");
+            break;
+        }
+        break;
+      default:
+        //以上都不符合走這個
+        console.log("Error");
+        break;
     }
   }
+
   orderTime = (e) => {
     const name = e.target.name;
     let value = e.target.value;
@@ -48,7 +206,7 @@ class DataPicker extends React.Component {
 
     //將可訂購時間丟入陣列，當使用者選擇日期時觸發
     const data = new Date();
-    const BusinessHours = [  '10:00','10:05','10:10','10:15','10:20','10:25','10:30','10:35','10:40','10:45','10:50','10:55'
+    const BusinessHours = ['10:00','10:05','10:10','10:15','10:20','10:25','10:30','10:35','10:40','10:45','10:50','10:55'
     ,'11:00','11:05','11:10','11:15','11:20','11:25','11:30','11:35','11:40','11:45','11:50','11:55'
     ,'12:00','12:05','12:10','12:15','12:20','12:25','12:30','12:35','12:40','12:45','12:50','12:55'
     ,'13:00','13:05','13:10','13:15','13:20','13:25','13:30','13:35','13:40','13:45','13:50','13:55'
