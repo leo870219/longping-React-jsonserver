@@ -164,10 +164,70 @@
     }
   }
 }
-
-// ------- products component ---------
-
+  // ------- Cart component ---------
+  .cart-title {
+    padding: 1rem;
+    font-size: 3vmin;
+  }
+  .cart-total{
+    padding: 1rem;
+  }
+  .cart-page{
+    min-height: 100%;
+    padding-top:50px;
+    padding-bottom:180px;
+  }
+  .cart-list{
+    border-style:groove;
+  }
+  .total-price{
+    padding: 5px;
+  }
+  .cart-to-order{
+    margin-left: 20px;
+    border-radius:5px 5px ;
+    padding: 5px;
+  }
+  // ------- CartItem component ---------
+  .cartitem-container {
+    background: rgb(241, 241, 234);
+    padding: 1rem;
+    .cart-close {
+      margin: 1rem;
+    }
+  }
+  .cart-item-enter {
+    opacity: 0.1;
+    transition: all 0.3s ease-in;
+  }
+  .cart-item-enter.cart-item-enter-active {
+    opacity: 1;
+  }
+  .cart-item-exit {
+    opacity: 1;
+    transition: all 0.3s ease-in;
+  }
+  .cart-item-exit.cart-item-exit-active {
+    opacity: 0.1;
+  }
+  .mount{
+    font-size: 1rem;
+  }
+  .no-cart {
+    border-style:groove;
+    padding: 1.5rem;
+    background: rgb(241, 241, 234);
+    text-align: center;
+    margin-top: 1.5rem;
+  }
 // ---------- Inventory Component --------
 .inventory {
   padding: 1rem 2rem;
 }
+// ------- CheckListItem component ---------
+.submit-order{
+  margin-left: 20px;
+  border-radius:5px 5px ;
+  padding: 5px;
+}
+

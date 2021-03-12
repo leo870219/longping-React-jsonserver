@@ -24,7 +24,7 @@ class AddInventory extends React.Component {
     const product = { ...this.state };
     try {
       let response = await axios.post(
-        "http://localhost/html/longping/longping/src/php/Products.php",
+        "/products",
         product
       );
       this.props.close(response.data)

@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "css/app.scss";
 import "css/css.css";
+import "commons/auth";
 ReactDOM.render(
   <div>
     <ToastContainer

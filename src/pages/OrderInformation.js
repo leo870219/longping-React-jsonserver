@@ -1,5 +1,5 @@
 import React from "react";
-import axios from  "axios";
+import axios from "../commons/axios";
 import DataPicker from "../components/DataPicker";
 
 class OrderInformation extends React.Component {
@@ -19,22 +19,27 @@ class OrderInformation extends React.Component {
       area: "",
       road: "",
       delivery: [],
+      deliveryplace: "",
     };
+  }
+
+  componentDidMount() {
+    const user = global.auth.getUser() || {};
+    this.setState({
+      username: user.nickname,
+      usermail: user.email,
+      usertel: user.tel,
+    });
   }
 
   submit = async (e) => {
     e.preventDefault();
-    const orderinformation = { ...this.state };
-    try {
-      let response = await axios.post(
-        "/php/OrderInformation.php",
-        orderinformation
-      );
-      this.props.history.push('/booking');
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    const orderInformation = { ...this.state };
+    const path = {
+      pathname: "/checklist",
+      state: orderInformation,
+    };
+    this.props.history.push(path);
   };
 
   handleChange = (e) => {
@@ -47,7 +52,7 @@ class OrderInformation extends React.Component {
   displayBlock = async () => {
     this.setState({ display: "" });
     try {
-      const response = await axios.get("road.json");
+      const response = await axios.get("http://localhost:3000/road.json");
       this.setState({ delivery: response.data.address });
       this.setState({ area: response.data.address[0].area });
       this.setState({ road: response.data.address[0].road[0] });
@@ -80,7 +85,11 @@ class OrderInformation extends React.Component {
     this.setState({ road: e.target.value });
   };
   changeAddress = (e) => {
-    this.setState({ address: e.target.value });
+    this.setState({
+      address: e.target.value,
+      deliveryplace:
+        this.state.city + this.state.area + this.state.road + e.target.value,
+    });
   };
 
   render() {
@@ -128,20 +137,21 @@ class OrderInformation extends React.Component {
                 time={this.state.taketime}
               />
             </div>
-            <label>姓名:</label>
+            <label>中文姓名:</label>
             <input
               type="text"
               className="form-control"
               name="username"
               onChange={this.handleChange}
               value={this.state.username}
+              pattern="^[\u4e00-\u9fa5]{2,4}$"
               required="required"
             />
             <label>手機:</label>
             <input
               type="tel"
               className="form-control"
-              pattern="(\d{4}-\d{6})"
+              pattern="(09\d{8})"
               placeholder="手機號碼"
               title="例:0987-654321"
               name="usertel"
@@ -169,7 +179,7 @@ class OrderInformation extends React.Component {
                 id="city"
                 size="1"
                 placeholder="請選擇外送地址"
-                onChange={this.handleChange}  
+                onChange={this.handleChange}
               >
                 <option>{this.state.city}</option>
               </select>
@@ -179,7 +189,7 @@ class OrderInformation extends React.Component {
                 id="area"
                 size="1"
                 onChange={this.changeArea}
-                required={(this.state.takeway==='外送')? 'required' : ''}
+                required={this.state.takeway === "外送" ? "required" : ""}
               >
                 {this.state.delivery.map((item, index) => {
                   return <option key={index}>{item.area}</option>;
@@ -209,7 +219,7 @@ class OrderInformation extends React.Component {
                 placeholder="外送地址"
                 onChange={this.changeAddress}
                 value={this.state.address}
-                required={(this.state.takeway==='外送')? 'required' : ''}
+                required={this.state.takeway === "外送" ? "required" : ""}
               />
             </div>
             <button type="submit" className="btn btn-primary">
