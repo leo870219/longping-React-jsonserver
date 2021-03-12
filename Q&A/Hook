@@ -1,0 +1,8 @@
+2021/03/02
+
+Hook:不寫class的情況下依然可以使用state、React特性
+useState:用來操作state(等於一般組件state)
+useEffect會在畫面渲染前執行，如果不設第二個依賴參數會不斷重複執行
+(等於一般組件componentDidMount)
+用法:useEffect(()=>{callback function,[所依賴參數]})
+如為空，用法等同於componentDidMount，只渲染一次
