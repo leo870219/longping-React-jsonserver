@@ -19,19 +19,13 @@ class AddInventory extends React.Component {
       [name]: value,
     });
   };
-  submit = async (e) => {
+  submit = e => {
     e.preventDefault();
     const product = { ...this.state };
-    try {
-      let response = await axios.post(
-        "https://longping-phpmysql.herokuapp.com/Products.php",
-        product
-      );
-      this.props.close(response.data)
-      toast.success('Add Success')
-    } catch (error) {
-      console.log(error);
-    }
+    axios.post("/product").then(res=>{
+      this.props.close(product)
+      toast.success("Add Success");
+    })
   };
   render() {
     return (

@@ -35,24 +35,26 @@ class EditInventor extends React.Component {
     const product = { ...this.state };
     try {
       let response = await axios.put(
-        "https://longping-phpmysql.herokuapp.com/Products.php",
+        `product/${this.state.id}`,
         product
       );
-      this.props.close(response.data);
-      toast.success("Edit Success");
+      
+      this.props.close(product);
+      toast.success("Edit "+response.data);
     } catch (error) {
       console.log(error);
       
     }
   };
   onDelete = async (e) => {
-    const product = { ...this.state };
     try {
-      let response = await axios.delete(
-        "http://localhost/html/longping/longping/src/php/Products.php",
+      const product = { ...this.state };
+       await axios.delete(
+        "Products.php",
         {data:product}
       );
-      this.props.close(response.data);
+      this.props.deleteProduct(this.state.id)
+      this.props.close();
       toast.success("Delete Success");
     } catch (error) {
       console.log(error);

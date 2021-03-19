@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "commons/axios";
+import { toast } from "react-toastify";
 import Panel from "components/Panel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faSlidersH } from "@fortawesome/free-solid-svg-icons";
@@ -9,13 +11,46 @@ class Menu extends React.Component {
       component: EditInventor,
       props: {
         product: this.props.product,
+        deleteProduct:this.props.delete
       },
-      callback: (data) => {
+      callback: data => {
         if (data) {
           this.props.update(data);
         }
       },
     });
+  };
+  addCart = async () => {
+    const { id, name, image, price } = this.props.product;
+    const res = await axios.get(`https://longping-phpmysql.herokuapp.com/Cart.php?productid=${id}`
+    
+    );
+    const carts = res.data;
+    console.log(carts)
+    if (carts && carts.length > 0) {
+      const cart = carts[0];
+      cart.mount += 1;
+      await axios.put(`https://longping-phpmysql.herokuapp.com/Cart.php/${id}`
+      , cart);
+    } else {
+      const cart = {
+        product: id,
+        name,
+        image,
+        price,
+        mount: 1,
+      };
+      try {
+        await axios
+          .post("https://longping-phpmysql.herokuapp.com/Cart.php", cart)
+          .then((res) => {
+            console.log(res.data);
+            toast.success("新增商品至購物車成功");
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
   render() {
     const { name, image, price } = this.props.product;
@@ -33,7 +68,7 @@ class Menu extends React.Component {
           <p className="card-title d-flex justify-content-start">{name}</p>
           <div className="cart-text d-flex justify-content-between">
             <span className="menu-card-text ">${price}</span>
-            <button className="card-link">
+            <button className="card-link" onClick={this.addCart}>
               <FontAwesomeIcon icon={faCartPlus} />
             </button>
           </div>

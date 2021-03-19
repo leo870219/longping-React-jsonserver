@@ -299,7 +299,6 @@ class DataPicker extends React.Component {
         taketime.options[i] = new Option(BusinessHours[i]);
       }
       this.props.onChange(BusinessHours[0], "taketime");
-      console.log(UserOrderDate[2] !== data.getDate());
     } else {
       alert("請在早上10點後及晚上8點前訂購哦~"); //如未在許可時間範圍訂購將跳出提醒，並清空值防止訂購資訊錯誤
       value = "";

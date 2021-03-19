@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "commons/axios";
 import MainImage from "components/MainImage";
 import Product from "components/Product";
 
@@ -12,7 +12,7 @@ class Products extends React.Component {
   componentDidMount = async () => {
     try {
       const response = await axios.get(
-        'https://longping-phpmysql.herokuapp.com/Products.php'
+        '/product'
       );
       this.setState({ products: response.data });
     } catch (error) {

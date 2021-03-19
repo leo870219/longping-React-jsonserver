@@ -1,5 +1,6 @@
 import React from "react";
-import axios from  "axios";
+import axios from  "commons/axios";
+import _axios from  "axios";
 import DataPicker from "../components/DataPicker";
 
 class OrderInformation extends React.Component {
@@ -27,7 +28,7 @@ class OrderInformation extends React.Component {
     const orderinformation = { ...this.state };
     try {
       let response = await axios.post(
-        "https://longping-phpmysql.herokuapp.com/OrderInformation.php",
+        "OrderInformation.php",
         orderinformation
       );
       this.props.history.push('/booking');
@@ -47,7 +48,7 @@ class OrderInformation extends React.Component {
   displayBlock = async () => {
     this.setState({ display: "" });
     try {
-      const response = await axios.get("road.json");
+      const response = await _axios.get("road.json");
       this.setState({ delivery: response.data.address });
       this.setState({ area: response.data.address[0].area });
       this.setState({ road: response.data.address[0].road[0] });
