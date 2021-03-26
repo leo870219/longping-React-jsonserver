@@ -1,0 +1,10 @@
+權重由後蓋前
+
+保留字:none、initial
+
+ 宣告方式:@動畫名稱
+
+綁定animation-name:動畫名稱
+
+animation-duration 動畫持續時間:
+基本上和 animation-name 動畫名稱都是屬於一定要有的屬性。
