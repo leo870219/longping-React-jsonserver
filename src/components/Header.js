@@ -10,25 +10,24 @@ class Header extends React.Component {
     super(props);
 
     this.state = {};
-
   }
-     toProfile = () => {
-      Panel.open({
-        component: UserProfile,
-        props: {
-          user: this.props.user,
-        },
-        callback: (data) => {
-          if (data === "logout") {
-            this.props.history.go(0);
-          }
-        },
-      });
-    };
+  toProfile = () => {
+    Panel.open({
+      component: UserProfile,
+      props: {
+        user: this.props.user,
+      },
+      callback: (data) => {
+        if (data === "logout") {
+          this.props.history.go(0);
+        }
+      },
+    });
+  };
   render() {
     return (
       <header>
-        <nav className="navbar navbar-expand-md navbar-light">
+        <nav className="navbar navbar-expand-md navbar-light bg-light">
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">
               <img
@@ -52,7 +51,7 @@ class Header extends React.Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li className="nav-item">
+                <li className="nav-item active">
                   <Link className="nav-link" to="/">
                     關於龍品
                   </Link>
@@ -68,9 +67,9 @@ class Header extends React.Component {
                   </Link>
                 </li>
               </ul>
-              <span className="navbar-text ">
-                <div className="row">
-                  {this.props.user.nickname ? (
+              <ul className="navbar-nav mr-0 mt-2 mt-lg-0">
+                {this.props.user.nickname ? (
+                  <li className="nav-item">
                     <span
                       className="nickname nav-link text-dark"
                       onClick={this.toProfile}
@@ -78,24 +77,28 @@ class Header extends React.Component {
                       <FontAwesomeIcon icon={faUser} />
                       {this.props.user.nickname}
                     </span>
-                  ) : (
-                    <React.Fragment>
+                  </li>
+                ) : (
+                  <React.Fragment>
+                    <li className="nav-item">
                       <Link className="nav-link" to="/login">
                         會員登入
                       </Link>
+                    </li>
+                    <li className="nav-item">
                       <Link className="nav-link" to="/register">
                         會員註冊
                       </Link>
-                    </React.Fragment>
-                  )}
-                  <a
-                    className="nav-link"
-                    href="https://www.facebook.com/%E9%BE%8D%E5%93%81%E5%BF%AB%E9%A4%90%E5%BA%97-300982883289665/?ref=br_rs"
-                  >
-                    <i className="fab fa-facebook-square"></i>Facebook
-                  </a>
-                </div>
-              </span>
+                    </li>
+                  </React.Fragment>
+                )}
+                <a
+                  className="nav-link"
+                  href="https://www.facebook.com/%E9%BE%8D%E5%93%81%E5%BF%AB%E9%A4%90%E5%BA%97-300982883289665/?ref=br_rs"
+                >
+                  <i className="fab fa-facebook-square"></i>Facebook
+                </a>
+              </ul>
             </div>
           </div>
         </nav>

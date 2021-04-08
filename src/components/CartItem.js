@@ -37,7 +37,7 @@ const CartItem = (props) => {
           {name}
         </Col>
         <Col>
-          <span className="price">{price}</span>
+          <span className="price">${price}</span>
         </Col>
         <Col>
           <select value={mount} onChange={handleChange} className="mount" >
