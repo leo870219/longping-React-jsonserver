@@ -35,7 +35,7 @@ class EditInventor extends React.Component {
     const product = { ...this.state };
     try {
       let response = await axios.put(
-        `product/${this.state.id}`,
+        `/products/${this.state.id}`,
         product
       );
       
@@ -48,11 +48,10 @@ class EditInventor extends React.Component {
   };
   onDelete = async (e) => {
     try {
-      const product = { ...this.state };
-       await axios.delete(
-        "Products.php",
-        {data:product}
+      let response = await axios.delete(
+        `/products/${this.state.id}`
       );
+      console.log(response)
       this.props.deleteProduct(this.state.id)
       this.props.close();
       toast.success("Delete Success");

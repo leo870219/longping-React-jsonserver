@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "commons/axios";
+import axios from "../commons/axios";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ToolBox from "components/ToolBox";
 import Menu from "components/Menu";
@@ -9,17 +9,16 @@ class Booking extends React.Component {
   state = {
     products: [],
     sourceProducts: [],
+    cartNum: 0,
   };
   componentDidMount = async () => {
     try {
-      const response = await axios.get(
-        "/product"
-      );
-      this.setState({ products: response.data });
-      this.setState({ sourceProducts: response.data });
+      const response = await axios.get("/products");
+      this.setState({ products: response.data, sourceProducts: response.data });
     } catch (error) {
       console.log(error);
     }
+    this.updateCartNum();
   };
   search = (text) => {
     let _products = [...this.state.sourceProducts].filter((p) => {
@@ -65,23 +64,41 @@ class Booking extends React.Component {
     });
   };
 
-  delete = id =>{
-    const _products = this.state.products.filter(p => p.id !== id)
-    const _sourceProducts = this.state.products.filter(p => p.id !== id)
+  updateCartNum = async () => {
+    const cartNum = await this.initCartNum();
     this.setState({
-      products:_products,
-      sourceProducts:_sourceProducts
-    })
-  }
+      cartNum: cartNum,
+    });
+  };
+
+  initCartNum = async () => {
+    try {
+      const user = global.auth.getUser() || {};
+      const res = await axios.get("/carts", {
+        params: {
+          userId: user.email,
+        },
+      });
+      const carts = res.data || [];
+      const cartNum = carts
+        .map((cart) => cart.mount)
+        .reduce((a, value) => a + value, 0);
+      return cartNum;
+    } catch (error) {
+      console.log(error);
+      return 0
+    }
+  };
+
   render() {
     return (
       <div className="order-menu">
         <div className="container">
-          <ToolBox search={this.search} />
+          <ToolBox search={this.search} cartNum={this.state.cartNum} />
           <hr />
           <div className="row">
             <TransitionGroup component={null}>
-              {this.state.products.map(p => {
+              {this.state.products.map((p) => {
                 return (
                   <CSSTransition
                     classNames="products-fade"
@@ -89,16 +106,22 @@ class Booking extends React.Component {
                     key={p.id}
                   >
                     <div className="col-sm-3 col-xs-12" key={p.id}>
-                    <Menu product={p} update={this.update} delete={this.delete}/>
+                      <Menu
+                        product={p}
+                        update={this.componentDidMount}
+                        updateCartNum={this.updateCartNum}
+                      />
                     </div>
                   </CSSTransition>
                 );
               })}
             </TransitionGroup>
+            {(global.auth.getUser() || {}).type === 1 && (
+              <button className="btn btn-primary add-btn" onClick={this.toAdd}>
+                add
+              </button>
+            )}
           </div>
-          <button className="btn btn-primary add-btn" onClick={this.toAdd}>
-            add
-          </button>
         </div>
       </div>
     );

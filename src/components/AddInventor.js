@@ -19,13 +19,19 @@ class AddInventory extends React.Component {
       [name]: value,
     });
   };
-  submit = e => {
+  submit = async(e) => {
     e.preventDefault();
     const product = { ...this.state };
-    axios.post("/product").then(res=>{
-      this.props.close(product)
-      toast.success("Add Success");
-    })
+    try {
+      let response = await axios.post(
+        "/products",
+        product
+      );
+      this.props.close(response.data)
+      toast.success('Add Success')
+    } catch (error) {
+      console.log(error);
+    }
   };
   render() {
     return (

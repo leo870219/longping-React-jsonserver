@@ -1,24 +1,54 @@
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
-h1,h2,h3,h4,h5,h6,p{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 1.5vmin 0;
 }
-h1{font-size: 8vmin;}
-h2{font-size: 7vmin;}
-h3{font-size: 6vmin;}
-h4{font-size: 5vmin;}
-h5{font-size: 4vmin;}
-h6{font-size: 3vmin;}
+h1 {
+  font-size: 8vmin;
+}
+h2 {
+  font-size: 7vmin;
+}
+h3 {
+  font-size: 6vmin;
+}
+h4 {
+  font-size: 5vmin;
+}
+h5 {
+  font-size: 4vmin;
+}
+h6 {
+  font-size: 3vmin;
+}
 
-p,b,a,label,span,ul,li {
+p,
+b,
+a,
+label,
+span,
+ul,
+li {
   font-family: cwTeXYen, sans-serif;
   font-size: 2.3vmin;
   text-align: center;
 }
-input,select{
+input,
+select {
   font-family: cwTeXYen, sans-serif;
   font-size: 2.3vmin;
 }
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: cwTeXYen, sans-serif;
   text-align: center;
 }
@@ -30,17 +60,17 @@ h1,h2,h3,h4,h5,h6 {
   font-size: 1.6rem;
   font-weight: 900;
 }
-select{
+select {
   font-family: cwTeXYen, sans-serif;
   font-size: 3vmin;
 }
-#root>header {
+#root > header {
   background-color: rgb(255, 255, 255);
 }
-#root>header a {
+#root > header a {
   text-align: left;
 }
-#root>header img{
+#root > header img {
   width: 8vmin;
   height: 6vmin;
 }
@@ -56,8 +86,8 @@ select{
   color: rgb(255, 255, 255);
 }
 
-#homeLocationInformation h5{
-  margin:2vmin auto 5vmin auto;
+#homeLocationInformation h5 {
+  margin: 2vmin auto 5vmin auto;
   background-color: #eeeee3;
   border-radius: 5vmin 5vmin;
   padding: 1vmin 4vmin;
@@ -83,17 +113,18 @@ select{
   height: 100%;
 }
 footer a {
-	color: grey;
-  }
-  footer a:hover {
-	color: black;
-  }
-footer h5,footer p {
+  color: grey;
+}
+footer a:hover {
+  color: black;
+}
+footer h5,
+footer p {
   text-align: left;
 }
 footer {
   border-top: 1px solid #000000;
-  padding: 6vmin;   
+  padding: 6vmin;
   background-color: rgb(238, 236, 231);
 }
 #third {
@@ -116,7 +147,7 @@ footer {
   letter-spacing: 3vmin;
   margin-top: 5vmin;
 }
-#fourthimg{
+#fourthimg {
   max-width: 80%;
   height: auto;
 }
@@ -126,181 +157,156 @@ footer {
   line-height: 7vmin;
 }
 
-#productList  .container{
+#productList .container {
   padding-bottom: 2rem;
 }
-#booking-second{
-	padding:25vmin 6vmin;
+#booking-second {
+  padding: 25vmin 6vmin;
 }
 #booking-second .container {
   background-color: rgb(255, 255, 255);
   border-radius: 2vmin 2vmin;
-
 }
-.form{
+.form {
   padding-top: 3vmin;
 }
-#bk-second-menu img{
-	max-width: 70%;
-	height: auto;
-	margin: 3vmin auto;
+#bk-second-menu img {
+  max-width: 70%;
+  height: auto;
+  margin: 3vmin auto;
 }
-#bk-second .title{
+#bk-second .title {
   font-size: 4vmin;
 }
-  #selectedMeal{
-    border:none;
-  }
-  #side1 .title{
-    font-size: 4vmin;
-  }
-  #side1 {
-    border-left: solid 1px rgb(197, 191, 191);
-    border-top: solid 1px rgb(197, 191, 191);
-    height: 180vmin;
-    overflow: scroll;
-  }
-  #booking-second button {
-    background-color: rgb(119, 172, 107);
-    font-family:cwTeXYen, sans-serif;
-    font-size: 3vmin;
-    margin: 1.6vmin auto;
-    width: 100%;
-    height: 40px;
-  }
+#selectedMeal {
+  border: none;
+}
+#side1 .title {
+  font-size: 4vmin;
+}
+#side1 {
+  border-left: solid 1px rgb(197, 191, 191);
+  border-top: solid 1px rgb(197, 191, 191);
+  height: 180vmin;
+  overflow: scroll;
+}
+#booking-second button {
+  background-color: rgb(119, 172, 107);
+  font-family: cwTeXYen, sans-serif;
+  font-size: 3vmin;
+  margin: 1.6vmin auto;
+  width: 100%;
+  height: 40px;
+}
 
-  #bk-second .justify-content-center .btn {
-    background-color: rgb(105, 163, 114);
-    width: 80%;
-    border: solid 1px;
-    border-radius: 10vmin;
-    margin:0 2vmin 2vmin 2vmin;
-    font-size: 3vmin;
-  }
-  .modal-body label , .modal-body p{
-    font-size: 3vmin;
-  }
-  .modal-header p,.modal-header input{
-    font-size: 3vmin;
-  }
-  .modal-body button {
-    width: 100%;
-    font-family: cwTeXYen, sans-serif;
-    margin-top: 3vmin;
-  }
-  #side1 button{
-    width: 100%;
-    font-family: cwTeXYen, sans-serif;
-    margin-bottom: 3vmin;
-    font-size: 3vmin;
-  }
+#bk-second .justify-content-center .btn {
+  background-color: rgb(105, 163, 114);
+  width: 80%;
+  border: solid 1px;
+  border-radius: 10vmin;
+  margin: 0 2vmin 2vmin 2vmin;
+  font-size: 3vmin;
+}
+.modal-body label,
+.modal-body p {
+  font-size: 3vmin;
+}
+.modal-header p,
+.modal-header input {
+  font-size: 3vmin;
+}
+.modal-body button {
+  width: 100%;
+  font-family: cwTeXYen, sans-serif;
+  margin-top: 3vmin;
+}
+#side1 button {
+  width: 100%;
+  font-family: cwTeXYen, sans-serif;
+  margin-bottom: 3vmin;
+  font-size: 3vmin;
+}
 
-  #side1 input,td{
-    font-family: cwTeXYen, sans-serif;
-  }
-  #ck-second .title{
-    font-size: 5vmin;
-    margin: 10vmin 0;
-  }
-  #ck-second .row{
-    margin: 10vmin 0;
-  }
-  #ck-second .table-responsive{
-    margin: 15vmin 0 5vmin 0;
-  }
-  #ck-second p{
-    text-align: left;
-    font-size: 3vmin;
-  }
-  .table td{
-    font-size: 3vmin;
-  }
-  .table{
-    margin: 0;
-  }
-  #ck-second .btn{
-    margin: 10px;
-    font-family: cwTeXYen, sans-serif;
-    font-size: 3vmin;
-    letter-spacing: 2vmin;
-    padding: 1vmin 4vmin;
-  }
-  #bkok-second h3{
-      padding: 17rem 0;
-      font-family: cwTeXYen, sans-serif;
-    }
+#side1 input,
+td {
+  font-family: cwTeXYen, sans-serif;
+}
+#ck-second .title {
+  font-size: 5vmin;
+  margin: 10vmin 0;
+}
+#ck-second .row {
+  margin: 10vmin 0;
+}
+#ck-second .table-responsive {
+  margin: 15vmin 0 5vmin 0;
+}
+#ck-second p {
+  text-align: left;
+  font-size: 3vmin;
+}
+.table td {
+  font-size: 3vmin;
+}
+.table {
+  margin: 0;
+}
+#ck-second .btn {
+  margin: 10px;
+  font-family: cwTeXYen, sans-serif;
+  font-size: 3vmin;
+  letter-spacing: 2vmin;
+  padding: 1vmin 4vmin;
+}
+#bkok-second h3 {
+  padding: 17rem 0;
+  font-family: cwTeXYen, sans-serif;
+}
 /* Extra small devices (portrait phones, less than 576px)*/
 @media (max-width: 575.98px) {
+  #productList .img-fluid {
+    max-width: 80%;
+    height: auto;
+  }
 
-
-#productList .img-fluid {
-  max-width: 80%;
-  height: auto;
-}
-
-#productList h6 {
-  color: white;
-  letter-spacing: 1vmin;
-}
-#third .btn {
-  width: 14vw;
-  height: 14vw;
-  font-size: 3vw;
-  padding: 3vw;
-}
-/*
-#side1 img{
-	max-width: 70%;
-	height: auto;
-	margin: 10px auto;
-	display:  flex;
-     align-items: center;
-     justify-content:  center;
-}
-
-#side1 .table{
-	margin: 0;
-}
-
-#side1 input,td{
-	font-family: cwTeXYen, sans-serif;
-}
-#side1 .btn,.modal-body .btn{
-	margin: 10px auto;
-width: 100%;
-}
-
-
-  */
+  #productList h6 {
+    color: white;
+    letter-spacing: 1vmin;
+  }
+  #third .btn {
+    width: 14vw;
+    height: 14vw;
+    font-size: 3vw;
+    padding: 3vw;
+  }
 }
 
 /* Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) and (max-width: 767.98px) {
-  #third .btn { 
+  #third .btn {
     margin: 1vw 1vw;
     width: 10vw;
     height: 10vw;
     font-size: 2vw;
     padding: 2vw;
-} 
+  }
 }
-
 
 /* Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) and (max-width: 991.98px) {
-  #third .btn { 
-      margin: 1vw 1vw;
-      width: 7vw;
-      height: 7vw;
-      font-size: 1.5vw;
-      padding: 1.5vw;
+  #third .btn {
+    margin: 1vw 1vw;
+    width: 7vw;
+    height: 7vw;
+    font-size: 1.5vw;
+    padding: 1.5vw;
   }
   #business h6 {
     margin: 6vmin auto;
     line-height: 5vmin;
   }
-  #booking-second{
-    padding:6vmin 6vmin;
+  #booking-second {
+    padding: 6vmin 6vmin;
   }
 }
 
@@ -309,7 +315,8 @@ width: 100%;
   #third .btn {
     margin: 1vw 1vw;
   }
-  #homeBigPicture img,#productBigPicture img{
+  #homeBigPicture img,
+  #productBigPicture img {
     width: 100%;
     height: 90vmin;
   }
@@ -328,8 +335,8 @@ width: 100%;
     margin: 7vmin auto;
     line-height: 7vmin;
   }
-  #booking-second{
-    padding:6vmin 6vmin;
+  #booking-second {
+    padding: 6vmin 6vmin;
   }
 }
 
@@ -343,7 +350,8 @@ width: 100%;
     padding: 1vw;
   }
 
-  #homeBigPicture img,#productBigPicture img{
+  #homeBigPicture img,
+  #productBigPicture img {
     width: 100%;
     height: 90vmin;
   }

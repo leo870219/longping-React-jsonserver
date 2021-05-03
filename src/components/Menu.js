@@ -1,10 +1,11 @@
 import React from "react";
-import axios from "commons/axios";
-import { toast } from "react-toastify";
+import { withRouter } from "react-router-dom";
 import Panel from "components/Panel";
+import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faSlidersH } from "@fortawesome/free-solid-svg-icons";
 import EditInventor from "components/EditInventor";
+import axios from "commons/axios";
 class Menu extends React.Component {
   toEdit = () => {
     Panel.open({
@@ -20,45 +21,57 @@ class Menu extends React.Component {
       },
     });
   };
+
   addCart = async () => {
-    const { id, name, image, price } = this.props.product;
-    const res = await axios.get(`https://longping-phpmysql.herokuapp.com/Cart.php?productid=${id}`
-    
-    );
-    const carts = res.data;
-    console.log(carts)
-    if (carts && carts.length > 0) {
-      const cart = carts[0];
-      cart.mount += 1;
-      await axios.put(`https://longping-phpmysql.herokuapp.com/Cart.php/${id}`
-      , cart);
-    } else {
-      const cart = {
-        product: id,
-        name,
-        image,
-        price,
-        mount: 1,
-      };
-      try {
-        await axios
-          .post("https://longping-phpmysql.herokuapp.com/Cart.php", cart)
-          .then((res) => {
-            console.log(res.data);
-            toast.success("新增商品至購物車成功");
-          });
-      } catch (error) {
-        console.log(error);
+    if (!global.auth.isLogin()) {
+      this.props.history.push("/login");
+      toast.info("請先登入");
+      return;
+    }
+    try {
+      const user = global.auth.getUser().email;
+      const { id, name, image, price } = this.props.product;
+      const res = await axios.get(`/carts?productId=${id}&userId=${user}`);
+      const carts = res.data;
+      console.log(carts)
+      if (carts && carts.length > 0) {
+        const cart = carts[0];
+        cart.mount += 1;
+        axios.put(`/carts/${cart.id}`, cart);
+      } else {
+        const cart = {
+          productId: id,
+          name,
+          image,
+          price,
+          mount: 1,
+          userId: user,
+        };
+        await axios.post("/carts", cart);
       }
+      toast.success("Add Cart Success");
+      this.props.updateCartNum();
+    } catch (error) {
+      toast.error("Add Cart Failed");
     }
   };
+
+  renderManagerButton = () => {
+    const user = global.auth.getUser() || {};
+    if (user.type === 1) {
+      return (
+        <div className="mr-3 mt-3 text-right" onClick={this.toEdit}>
+          <FontAwesomeIcon icon={faSlidersH} />
+        </div>
+      );
+    }
+  };
+
   render() {
     const { name, image, price } = this.props.product;
     return (
       <div className="card">
-        <div className="mr-3 mt-3 text-right" onClick={this.toEdit}>
-          <FontAwesomeIcon icon={faSlidersH} />
-        </div>
+        {this.renderManagerButton()}
         <img
           src={image}
           className="menu-card-img d-flex justify-content-center align-items-center;"
@@ -78,4 +91,4 @@ class Menu extends React.Component {
   }
 }
 
-export default Menu;
+export default withRouter(Menu);

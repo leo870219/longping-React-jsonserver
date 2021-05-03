@@ -8,6 +8,9 @@ import Login from "pages/Login";
 import Register from "pages/Register";
 import NotFound from "pages/NotFound";
 import Layout from "Layout";
+import Cart from "pages/Cart";
+import CheckList from 'pages/CheckList'
+
 const Router = () => (
   <BrowserRouter>
     <Layout>
@@ -17,7 +20,9 @@ const Router = () => (
         <Route path="/orderinformation" exact component={OrderInformation}/>
         <Route path="/booking" exact component={Booking}/>
         <Route path="/login" component={Login} />
+        <Route path="/cart" component={Cart} />
         <Route path="/register" component={Register} />
+        <Route path="/checklist" component={CheckList} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

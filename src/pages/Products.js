@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "commons/axios";
+import axios from "../commons/axios";
 import MainImage from "components/MainImage";
 import Product from "components/Product";
 
@@ -11,9 +11,7 @@ class Products extends React.Component {
 
   componentDidMount = async () => {
     try {
-      const response = await axios.get(
-        '/product'
-      );
+      const response = await axios.get("products");
       this.setState({ products: response.data });
     } catch (error) {
       console.log(error);
@@ -44,11 +42,11 @@ class Products extends React.Component {
               <a className="btn  btn-fuchsia" href="#6">
                 炸雞腿飯
               </a>
-            </div>
-            <div className="row justify-content-center button-group2">
               <a className="btn  btn-indigo" href="#7">
                 鱈魚飯
               </a>
+            </div>
+            <div className="row justify-content-center button-group2">
               <a className="btn  btn-saddlebrown" href="#8">
                 炸排骨飯
               </a>
@@ -64,17 +62,22 @@ class Products extends React.Component {
               <a className="btn  btn-royalblue" href="#12">
                 招牌飯
               </a>
+              <a className="btn  btn-royalblue" href="#13">
+                爌肉飯
+              </a>
+              <a className="btn  btn-royalblue" href="#14">
+                滷雞腿飯
+              </a>
             </div>
           </nav>
           <section id="productList">
-              {this.state.products.map((p) => {
-                return (
-                    <div className="container" key={p.id}>
-                      <Product product={p} />
-                    </div>
-
-                );
-              })}
+            {this.state.products.map((p) => {
+              return (
+                <div className="container" key={p.id}>
+                  <Product product={p} />
+                </div>
+              );
+            })}
           </section>
         </div>
       </div>
