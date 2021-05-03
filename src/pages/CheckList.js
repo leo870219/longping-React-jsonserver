@@ -45,7 +45,7 @@ class CheckList extends React.Component {
   };
   render() {
     return (
-      <Container>
+      <Container className="check-page">
         <h1>訂單確認</h1>
         <Table striped bordered hover size="sm">
           <thead>
