@@ -110,6 +110,12 @@
     top: 10rem;
     z-index: 99;
   }
+  .check-order-list-btn {
+    position: fixed;
+    right: 0;
+    top: 15rem;
+    z-index: 99;
+  }
 }
 
 // --------- Panel component ------------
@@ -230,5 +236,18 @@
   padding: 5px;
 }
 .check-page {
-  padding:25vh 6vmin
+  padding: 25vh 6vmin;
+}
+// ------- List component ---------
+
+.message-to-user {
+  background-color: lightcoral;
+  border-radius: 10px;
+  width: 150px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+.message-to-user p {
+  text-align: center;
 }

@@ -10,6 +10,7 @@ import NotFound from "pages/NotFound";
 import Layout from "Layout";
 import Cart from "pages/Cart";
 import CheckList from 'pages/CheckList'
+import SetList from 'pages/SetList'
 const Router = () => (
   <BrowserRouter>
     <Layout>
@@ -22,6 +23,7 @@ const Router = () => (
         <Route path="/cart" component={Cart} />
         <Route path="/register" component={Register} />
         <Route path="/checklist" component={CheckList} />
+        <Route path="/setlist" component={SetList} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

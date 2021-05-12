@@ -49,14 +49,6 @@ class CheckList extends React.Component {
         cart: this.orderTableList(),
       };
       emailjs
-        .send("service_keegrso", "template_8h061cv", templateParams)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      emailjs
         .send("service_keegrso", "template_ds5cp8g", templateParams)
         .then((response) => {
           console.log(response);

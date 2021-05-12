@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import axios from "../commons/axios";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ToolBox from "components/ToolBox";
@@ -40,7 +41,7 @@ class Booking extends React.Component {
       },
     });
   };
-  add = product => {
+  add = (product) => {
     const _products = [...this.state.products];
     _products.push(product);
     const _sourceProducts = [...this.state.sourceProducts];
@@ -51,7 +52,7 @@ class Booking extends React.Component {
       sourceProducts: _sourceProducts,
     });
   };
-  update = product => {
+  update = (product) => {
     const _products = [...this.state.products];
     const _index = _products.findIndex((p) => p.id === product.id);
     _products.splice(_index, 1, product);
@@ -86,7 +87,7 @@ class Booking extends React.Component {
       return cartNum;
     } catch (error) {
       console.log(error);
-      return 0
+      return 0;
     }
   };
 
@@ -117,9 +118,20 @@ class Booking extends React.Component {
               })}
             </TransitionGroup>
             {(global.auth.getUser() || {}).type === 1 && (
-              <button className="btn btn-primary add-btn" onClick={this.toAdd}>
-                add
-              </button>
+              <div>
+                <button
+                  className="btn btn-primary add-btn"
+                  onClick={this.toAdd}
+                >
+                  add
+                </button>
+                <Link
+                  to="/setlist"
+                  className="btn btn-primary check-order-list-btn"
+                >
+                  檢視訂單
+                </Link>
+              </div>
             )}
           </div>
         </div>
