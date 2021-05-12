@@ -121,11 +121,11 @@ class OrderInformation extends React.Component {
                   className="form-check-input"
                   id="takeout"
                   name="takeway"
-                  value="外帶"
+                  value="自取"
                   onChange={this.handleChange}
                   onClick={this.displayNone}
                 />
-                外帶
+                自取
               </label>
             </div>
             <br />
@@ -223,7 +223,7 @@ class OrderInformation extends React.Component {
               />
             </div>
             <button type="submit" className="btn btn-primary">
-              選擇餐點
+              前往確認訂單
             </button>
           </form>
         </div>

@@ -2,6 +2,9 @@ import React from "react";
 import { Container, Row, Table } from "react-bootstrap";
 import OrderList from "components/OrderList";
 import axios from "commons/axios";
+import emailjs from "emailjs-com";
+import { init } from "emailjs-com";
+init("user_SC5LteHAAjQgwfXNomwA9");
 
 class CheckList extends React.Component {
   constructor(props) {
@@ -19,6 +22,9 @@ class CheckList extends React.Component {
     };
   }
   componentDidMount() {
+    const date = new Date();
+    const id = `0000${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
+    this.setState({ id: id });
     const user = global.auth.getUser() || {};
     axios
       .get(`/carts?userId=${user.email}`)
@@ -34,14 +40,50 @@ class CheckList extends React.Component {
   orderSubmit = async () => {
     try {
       const orderdata = { ...this.state };
+      let templateParams = {
+        list_id: this.state.id,
+        username: this.state.username,
+        takeway: this.state.takeway,
+        takedate: this.props.location.state.takedate,
+        taketime: this.props.location.state.taketime,
+        cart: this.orderTableList(),
+      };
+      emailjs
+        .send("service_keegrso", "template_8h061cv", templateParams)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      emailjs
+        .send("service_keegrso", "template_ds5cp8g", templateParams)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       await axios.post("/orderlist", orderdata);
-      alert('訂單成功送出')
+      alert("訂單成功送出");
       setTimeout(() => {
         this.props.history.push("/");
       }, 5000);
     } catch (error) {
       console.log(error);
     }
+  };
+  orderTableList = () => {
+    const tableContent = this.state.carts
+      .map(
+        (item) =>
+          `<tr><td>${item.name}</td><td>數量 : ${
+            item.mount
+          }</td><td>單項總金額: ${item.mount * parseInt(item.price)}</td></tr>`
+      )
+      .reduce((previous, current) => previous + current);
+    const tableList = `<table width='500'>${tableContent}<tr><td>總金額: ${this.totalPrice()}</td></tr></table>`;
+    return tableList;
   };
   render() {
     return (

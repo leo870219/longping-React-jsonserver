@@ -10,7 +10,6 @@ import NotFound from "pages/NotFound";
 import Layout from "Layout";
 import Cart from "pages/Cart";
 import CheckList from 'pages/CheckList'
-
 const Router = () => (
   <BrowserRouter>
     <Layout>
