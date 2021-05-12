@@ -144,7 +144,7 @@ class OrderInformation extends React.Component {
               name="username"
               onChange={this.handleChange}
               value={this.state.username}
-              pattern="^[\u4e00-\u9fa5]{2,4}$"
+              //pattern="^[\u4e00-\u9fa5]{2,4}$"
               required="required"
             />
             <label>手機:</label>
